@@ -1,35 +1,20 @@
 package org.example.Tyrism;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
-
 import java.io.IOException;
-import java.sql.Driver;
 import java.util.ArrayList;
 
 public class ParserWorker<T> {
     Parser<T> parser;
-    ParserSettings parserSettings;
-    HTMLLoader loader;
+    String url;
     boolean isActive;
 
     public ArrayList<OnNewDataHandler> onNewDataList = new ArrayList<>();
     public ArrayList<OnCompleted> onCompletedList = new ArrayList<>();
 
-    public Parser<T> getParser() {
-        return parser;
-    }
-
-    public ParserSettings getParserSettings() {
-        return parserSettings;
-    }
-
-    public void setParser(Parser<T> parser) {
-        this.parser = parser;
-    }
-
-    public void setParserSettings(ParserSettings parserSettings) {
-        this.parserSettings = parserSettings;
-        loader=new HTMLLoader(parserSettings);
+    public void setParserSettings(String parserSettings) {
+        url = parserSettings;
     }
 
     public void Start()throws IOException{
@@ -50,7 +35,11 @@ public class ParserWorker<T> {
                 onCompletedList.get(0).OnCompleted(this);
                 return;
             }
-            WebDriver driver = loader.GetSourceByPageId();
+
+        WebDriver driver = WebDriverManager.chromedriver().create();
+        driver.get(url);
+
+            //WebDriver driver = loader.GetSourceByPageId();
             T result = parser.Parse(driver);
             driver.quit();
             onNewDataList.get(0).OnNewData(this,result);

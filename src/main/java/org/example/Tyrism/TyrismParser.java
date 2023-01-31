@@ -12,7 +12,7 @@ public class TyrismParser implements Parser<ArrayList<String>> {
     @Override
     public ArrayList<String> Parse(WebDriver driver) {
 
-        ArrayList<String> list = new ArrayList<>();
+        final ArrayList<String> list = new ArrayList<>();
 
         List<WebElement> reviewers = driver.findElements(By.cssSelector("div[class='find-list-box']"));
         int len = reviewers.size();
@@ -68,11 +68,9 @@ public class TyrismParser implements Parser<ArrayList<String>> {
                 }
             tourCompany.append("\n");
 
-
             list.add(tourCompany.toString());
             driver.navigate().back();
         }
-
 
         return list;
     }
