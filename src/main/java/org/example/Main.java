@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
+
         ParserWorker<ArrayList<String>> parser = new ParserWorker<>(new TyrismParser());
         parser.setParserSettings("https://nanegative.ru/turoperatory");
         parser.onCompletedList.add(new Completed());
