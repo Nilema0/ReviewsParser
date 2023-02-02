@@ -2,19 +2,14 @@ package org.example;
 
 import org.example.Tyrism.*;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
 public class Main {
-    public static void main(String[] args) throws IOException, InterruptedException {
-
-        ParserWorker<ArrayList<String>> parser = new ParserWorker<>(new TyrismParser());
-        parser.setParserSettings("https://nanegative.ru/turoperatory");
+    final static ParserWorker parser = new ParserWorker
+            (new TyrismParser(),"https://nanegative.ru/turoperatory");
+    static {
         parser.onCompletedList.add(new Completed());
         parser.onNewDataList.add(new NewData());
-
+    }
+    public static void main(String[] args) {
         parser.Start();
-        Thread.sleep(10000);
-        parser.Abort();
     }
 }
