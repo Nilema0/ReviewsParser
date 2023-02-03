@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TyrismParser implements Parser {
+    /**
+     * Метод, собирающий информацию с сайта.
+     * @param driver драйвер
+     * @return возвращает list, содержащий отобранную информацию.
+     */
     @Override
     public ArrayList<String> parse(final WebDriver driver) {
         final ArrayList<String> list = new ArrayList<>();
