@@ -19,6 +19,9 @@ public class ParserWorker {
         this.url=url;
     }
 
+    /**
+     * Метод отработки драйвера, запускает его, собранную информацию передаёт в интерфейсы.
+     */
     public void Start() {
         final WebDriver driver = WebDriverManager.chromedriver().create();
         driver.get(url);
